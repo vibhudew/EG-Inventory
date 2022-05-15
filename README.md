@@ -13,7 +13,15 @@
 
 ## Tools and Technologies used
 
-### View
+### For Client-Components
+<table align="center">
+  <tr>
+    <td align="center"><p size=40><b>JQuery (Implemented DC-Engine using Ajax methods)</b></p><a href="https://jquery.com/" target="_blank"><img src="https://img.icons8.com/ios-filled/100/000000/jquery.png" width="180"></a></td>
+  </tr>
+
+</table>
+
+### For View
 <table align="center">
   <tr>
     <td><a href="https://html.spec.whatwg.org/" target="_blank"><img src="https://img.icons8.com/color/200/html-5--v1.png" width="180"></a></td>
@@ -22,10 +30,4 @@
   </tr>
 </table>
 
-### Client-Components
-<table align="center">
-  <tr>
-    <td align="center"><p size=40><b>JQuery (Implemented DC-Engine using Ajax methods)</b></p><a href="https://jquery.com/" target="_blank"><img src="https://img.icons8.com/ios-filled/100/000000/jquery.png" width="180"></a></td>
-  </tr>
 
-</table>
