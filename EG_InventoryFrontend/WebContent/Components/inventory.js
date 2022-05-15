@@ -31,6 +31,7 @@ $(document).on("click", "#btnSave", function(event)
 		return;
 	}
 	// If valid------------------------
+	//==============================DC-Engine FOR INSERT AND UPDATE AJAX COMMUNICATION==========================================
 	var type = ($("#hidInvIDSave").val() == "") ? "POST" : "PUT";
 	$.ajax(
 			{
@@ -40,12 +41,20 @@ $(document).on("click", "#btnSave", function(event)
 				dataType : "text",
 				complete : function(response, status)
 				{
-					onItemSaveComplete(response.responseText, status);
+					if(type == "POST"){
+						onItemSaveComplete(response.responseText, status);
+					}
+					
+					else{
+						onItemUpdateComplete(response.responseText, status);
+					}
+					
 				}
 			});
 	
 		});
-
+		
+	
 function onItemSaveComplete(response, status)
 {
 	if (status == "success")
@@ -54,10 +63,12 @@ function onItemSaveComplete(response, status)
 		
 		if (resultSet.status.trim() == "success")
 		{
-			$("#alertSuccess").text("Successfully saved a inventory record.");
+			
+			$("#alertSuccess").text("INSERTED A INVENTORY RECORD SUCCESSFULLY");
 			$("#alertSuccess").show();
 			$("#divInvGrid").html(resultSet.data);
-						
+			
+								
 		} else if (resultSet.status.trim() == "error")
 		{
 			$("#alertError").text(resultSet.data);
@@ -87,8 +98,39 @@ $(document).on("click", ".btnUpdate", function(event)
 	$("#handledBy").val($(this).closest("tr").find('td:eq(5)').text());
 });
 
+function onItemUpdateComplete(response, status)
+{
+	if (status == "success")
+	{
+		var resultSet = JSON.parse(response);
+		
+		if (resultSet.status.trim() == "success")
+		{
+			$("#alertSuccess").text("UPDATED A INVENTORY RECORD SUCCESSFULLY");
+			$("#alertSuccess").show();
+			$("#divInvGrid").html(resultSet.data);
+						
+		} else if (resultSet.status.trim() == "error")
+		{
+			$("#alertError").text(resultSet.data);
+			$("#alertError").show();
+		}
+	} else if (status == "error")
+	{
+		$("#alertError").text("Error while saving.");
+		$("#alertError").show();
+	} else
+	{
+		$("#alertError").text("Unknown error while saving..");
+		$("#alertError").show();
+	}
+	$("#hidInvIDSave").val("");
+}
+
+
 //DELETE============================================
 $(document).on("click", ".btnRemove", function(event)
+//==============================DC-Engine FOR DELETE AJAX COMMUNICATION==========================================
 		{
 	$.ajax(
 			{
@@ -111,7 +153,7 @@ function onItemDeleteComplete(response, status)
 		
 		if (resultSet.status.trim() == "success")
 		{
-			$("#alertSuccess").text("Successfully deleted a inventory record.");
+			$("#alertSuccess").text("DELETED A INVENTORY RECORD SUCCESSFULLY");
 			$("#alertSuccess").show();
 			$("#divInvGrid").html(resultSet.data);
 			

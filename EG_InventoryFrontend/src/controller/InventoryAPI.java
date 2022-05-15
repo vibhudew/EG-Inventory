@@ -7,41 +7,43 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Inventory;
+import servermodel.Inventory;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+ //========================================================IMPLEMENTS DC BUS===================================================================================
 /**
  * Servlet implementation class CartAPI
  */
 @WebServlet("/InventoryAPI")
 public class InventoryAPI extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
+	
 	Inventory inv = new Inventory();
     /**
      * @see HttpServlet#HttpServlet()
      */
     public InventoryAPI() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
+
+	//=================================================for INSERT OPERATION====================================================================
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
 		String output = inv.insertInventory(request.getParameter("invCode"),
 				request.getParameter("invName"),
 				request.getParameter("manufact"),
@@ -51,35 +53,8 @@ public class InventoryAPI extends HttpServlet {
 		response.getWriter().write(output);
 	}
 
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		Map paras = getParasMap(request);
-		String output = inv.updateInventory(paras.get("hidInvIDSave").toString(),
-				paras.get("invCode").toString(),
-				paras.get("invName").toString(),
-				paras.get("manufact").toString(),
-				paras.get("stockQty").toString(),
-				paras.get("repair").toString(),
-				paras.get("handledBy").toString());
-		response.getWriter().write(output);
-	}
-
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		Map paras = getParasMap(request);
-		String output = inv.deleteInventory(paras.get("invID").toString());
-		response.getWriter().write(output);
-	}
 	
-	// Convert request parameters to a Map
+	// ========================================CONVERT REQUEST PARAMETERS TO MAP===============================================================================
 	private static Map getParasMap(HttpServletRequest request)
 	{
 		Map<String, String> map = new HashMap<String, String>();
@@ -101,5 +76,33 @@ public class InventoryAPI extends HttpServlet {
 		}
 		return map;
 	}
+
+	//======================================================for UPDATE OPEARTION================================================================================
+	/**
+	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
+	 */
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Map paras = getParasMap(request);
+		String output = inv.updateInventory(paras.get("hidInvIDSave").toString(),
+				paras.get("invCode").toString(),
+				paras.get("invName").toString(),
+				paras.get("manufact").toString(),
+				paras.get("stockQty").toString(),
+				paras.get("repair").toString(),
+				paras.get("handledBy").toString());
+		response.getWriter().write(output);
+	}
+
+	//===========================================================for DELETE OPERATION================================================================================
+	/**
+	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
+	 */
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Map paras = getParasMap(request);
+		String output = inv.deleteInventory(paras.get("invID").toString());
+		response.getWriter().write(output);
+	}
+	
 
 }
