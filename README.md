@@ -1,8 +1,9 @@
-## EG-Inventory Management Frontend Development - IT19118482
+## Programming and Application Frameworks Module - Mini Individual Assignment
+### EG-Inventory Management Frontend Development
 
 <p>All four CRUD operations for Inventory Management Service are implemented and tested properly.</p>
 
-## Test Results
+### Test Results
 
 | TEST ID | TEST DESCRIPTION | EXPECTED OUTPUT | ACTUAL OUTPUT | RESULT |
 | --- | --- | --- | --- |--- |
